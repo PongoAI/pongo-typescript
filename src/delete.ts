@@ -1,15 +1,25 @@
 import axios from 'axios';
 import { BASE_URL } from './utils'
 
-export async function deleteDocument(
+export async function deleteDocument(args: {
   publicKey: string,
   secretKey: string,
   subOrgId: string,
   docId?: string,
   parentId?: string,
   websiteUrl?: string,
-  version: string = "v1"
-): Promise<any> {
+  version?: string
+}): Promise<any> {
+  var {
+    publicKey,
+    secretKey,
+    subOrgId,
+    docId,
+    parentId,
+    websiteUrl,
+    version = "v1"
+  } = args;
+
   const headers = {
     secret: secretKey,
     id: publicKey,

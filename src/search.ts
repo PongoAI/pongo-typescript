@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { BASE_URL } from './utils';
 
-export async function search(
-  publicKey: string,
-  secretKey: string,
-  subOrgId: string,
-  query: string,
-  numResults: number = 15,
-  maxRerankerResults: number = 5,
-  startTime?: string,
-  endTime?: string,
-  sources: string[] = [],
-  version: string = "v1",
-): Promise<any> {
+export async function search({
+  publicKey,
+  secretKey,
+  subOrgId,
+  query,
+  numResults = 15,
+  maxRerankerResults = 5,
+  startTime,
+  endTime,
+  sources = [],
+  version = "v1",
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,

@@ -1,12 +1,17 @@
 import axios from 'axios';
 import { BASE_URL } from './utils';
 
-export async function createSubOrg(
+export async function createSubOrg({
+  publicKey,
+  secretKey,
+  subOrgName,
+  version = "v1",
+}: {
   publicKey: string,
   secretKey: string,
   subOrgName: string,
-  version: string = "v1",
-): Promise<any> {
+  version?: string
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -24,11 +29,15 @@ export async function createSubOrg(
   }
 }
 
-export async function getSubOrgs(
+export async function getSubOrgs({
+  publicKey,
+  secretKey,
+  version = "v1",
+}: {
   publicKey: string,
   secretKey: string,
-  version: string = "v1",
-): Promise<any> {
+  version?: string
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -43,12 +52,17 @@ export async function getSubOrgs(
   }
 }
 
-export async function getSubOrg(
+export async function getSubOrg({
+  publicKey,
+  secretKey,
+  subOrgId,
+  version = "v1",
+}: {
   publicKey: string,
   secretKey: string,
   subOrgId: string,
-  version: string = "v1",
-): Promise<any> {
+  version?: string
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -66,12 +80,17 @@ export async function getSubOrg(
   }
 }
 
-export async function deleteSubOrg(
+export async function deleteSubOrg({
+  publicKey,
+  secretKey,
+  subOrgId,
+  version = "v1",
+}: {
   publicKey: string,
   secretKey: string,
   subOrgId: string,
-  version: string = "v1",
-): Promise<any> {
+  version?: string
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -89,13 +108,19 @@ export async function deleteSubOrg(
   }
 }
 
-export async function updateSubOrg(
+export async function updateSubOrg({
+  publicKey,
+  secretKey,
+  subOrgId,
+  subOrgName,
+  version = "v1",
+}: {
   publicKey: string,
   secretKey: string,
   subOrgId: string,
   subOrgName: string,
-  version: string = "v1",
-): Promise<any> {
+  version?: string
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,

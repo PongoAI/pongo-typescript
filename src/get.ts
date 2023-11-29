@@ -1,14 +1,21 @@
 import axios from 'axios';
 import { BASE_URL } from './utils';
 
-export async function get(
+export async function get({
+  publicKey,
+  secretKey,
+  subOrgId,
+  docId,
+  parentId,
+  version = "v1"
+}: {
   publicKey: string,
   secretKey: string,
   subOrgId: string,
   docId?: string,
   parentId?: string,
-  version: string = "v1"
-): Promise<any> {
+  version?: string
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,

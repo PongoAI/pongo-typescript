@@ -5,17 +5,17 @@ import { randomUUID } from 'crypto';
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 
-export async function upload(
-  publicKey: string,
-  secretKey: string,
-  subOrgId: string,
-  sourceName: string,
-  data: string | string[],
-  metadata: object = {},
-  parentId?: string,
-  timestamp?: number,
-  version: string = "v1",
-): Promise<any> {
+export async function upload({
+  publicKey,
+  secretKey,
+  subOrgId,
+  sourceName,
+  data,
+  metadata = {},
+  parentId,
+  timestamp,
+  version = "v1",
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -25,19 +25,11 @@ export async function upload(
     source: sourceName,
     data: data,
     metadata: metadata,
-    timestamp: timestamp,
-    parent_id: parentId,
+    timestamp: timestamp || Math.floor(Date.now() / 1000),
+    parent_id: parentId || randomUUID(),
   };
 
   const url = `${BASE_URL}/api/${version}/upload-data`;
-
-  if (!timestamp) {
-    payload.timestamp = Math.floor(Date.now() / 1000);
-  }
-
-  if (!parentId) {
-    payload.parent_id = randomUUID();
-  }
 
   try {
     const response = await axios.post(url, payload, { headers });
@@ -47,38 +39,30 @@ export async function upload(
   }
 }
 
-export async function uploadPdf(
-  publicKey: string,
-  secretKey: string,
-  subOrgId: string,
-  sourceName: string,
-  filePath: string,
-  metadata: object = {},
-  parentId?: string,
-  timestamp?: number,
-  version: string = "v1",
-): Promise<any> {
+export async function uploadPdf({
+  publicKey,
+  secretKey,
+  subOrgId,
+  sourceName,
+  filePath,
+  metadata = {},
+  parentId,
+  timestamp,
+  version = "v1",
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/upload-pdf`;
 
-  let payload: any = {
-    sub_org_id: subOrgId,
-    source: sourceName,
-    metadata: metadata,
-    timestamp: timestamp,
-    parent_id: parentId,
-  };
-
-  if (!timestamp) {
-    payload.timestamp = Math.floor(Date.now() / 1000);
-  }
-
-  if (!parentId) {
-    payload.parent_id = randomUUID();
-  }
+  // let payload: any = {
+  //   sub_org_id: subOrgId,
+  //   source: sourceName,
+  //   metadata: metadata,
+  //   timestamp: timestamp || Math.floor(Date.now() / 1000),
+  //   parent_id: parentId || randomUUID(),
+  // };
 
   if (filePath.endsWith(".pdf")) {
     const fs = require('fs');
@@ -106,3 +90,4 @@ export async function uploadPdf(
     throw new Error("Provided file is not a PDF.");
   }
 }
+

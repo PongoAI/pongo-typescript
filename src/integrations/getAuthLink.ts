@@ -1,14 +1,23 @@
 import axios from 'axios';
 import { BASE_URL } from '../utils';
 
-export async function getAuthLink(
+export async function getAuthLink(args: {
   publicKey: string,
   secretKey: string,
   subOrgId: string,
   integrationName: string,
   redirectUri: string,
-  version: string = "v1"
-): Promise<any> {
+  version?: string
+}): Promise<any> {
+  const {
+    publicKey,
+    secretKey,
+    subOrgId,
+    integrationName,
+    redirectUri,
+    version = "v1"
+  } = args;
+
   const headers = {
     secret: secretKey,
     id: publicKey,

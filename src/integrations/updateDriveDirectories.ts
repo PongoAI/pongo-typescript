@@ -1,13 +1,21 @@
 import axios from 'axios';
 import { BASE_URL } from '../utils';
 
-export async function updateDriveDirectories(
+export async function updateDriveDirectories(args: {
   publicKey: string,
   secretKey: string,
   newDirs: any[],
   integrationId: string,
-  version: string = "v1"
-): Promise<any> {
+  version?: string
+}): Promise<any> {
+  const {
+    publicKey,
+    secretKey,
+    newDirs,
+    integrationId,
+    version = "v1"
+  } = args;
+
   const headers = {
     secret: secretKey,
     id: publicKey,

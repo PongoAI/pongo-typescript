@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { BASE_URL } from './utils';
 
-export async function scrapeWebsite(
-  publicKey: string,
-  secretKey: string,
-  subOrgId: string,
-  siteName: string,
-  siteUrl: string,
-  version: string = "v1",
-): Promise<any> {
+export async function scrapeWebsite({
+  publicKey,
+  secretKey,
+  subOrgId,
+  siteName,
+  siteUrl,
+  version = "v1",
+}): Promise<any> {
   const headers = {
     secret: secretKey,
     id: publicKey,
