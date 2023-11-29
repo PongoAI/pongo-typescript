@@ -33,8 +33,11 @@ export async function search({
 
   try {
     const response = await axios.get(url, { headers, params });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }

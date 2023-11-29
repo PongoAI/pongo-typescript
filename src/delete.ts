@@ -54,8 +54,11 @@ export async function deleteDocument(args: {
 
   try {
     const response = await axios.delete(url, { headers, params, timeout: 120000 });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }

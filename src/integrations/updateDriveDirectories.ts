@@ -24,8 +24,11 @@ export async function updateDriveDirectories(args: {
 
   try {
     const response = await axios.post(url, { new_dirs: newDirs, integration_id: integrationId }, { headers });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }

@@ -23,8 +23,11 @@ export async function scrapeWebsite({
 
   try {
     const response = await axios.post(url, payload, { headers });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }

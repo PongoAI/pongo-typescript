@@ -26,8 +26,11 @@ export async function getAuthLink(args: {
 
   try {
     const response = await axios.get(url, { headers });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }

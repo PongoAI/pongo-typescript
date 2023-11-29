@@ -20,7 +20,7 @@ export async function get({
     secret: secretKey,
     id: publicKey,
   };
-  const url = `${BASE_URL}/api/${version}/get_data`;
+  const url = `${BASE_URL}/api/${version}/data`;
 
   if (!docId && !parentId) {
     throw new Error("Must provide either doc_id or parent_id");
@@ -38,8 +38,11 @@ export async function get({
 
   try {
     const response = await axios.get(url, { headers, params });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }

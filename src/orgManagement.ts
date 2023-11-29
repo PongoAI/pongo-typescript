@@ -22,9 +22,12 @@ export async function createSubOrg({
   };
 
   try {
-    const response = await axios.post(url, payload, { headers });
-    return response.data;
+    const response = await axios.post(url, payload, { headers});
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }
@@ -46,8 +49,11 @@ export async function getSubOrgs({
 
   try {
     const response = await axios.get(url, { headers });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }
@@ -74,8 +80,11 @@ export async function getSubOrg({
 
   try {
     const response = await axios.get(url, { headers, params });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }
@@ -101,9 +110,12 @@ export async function deleteSubOrg({
   };
 
   try {
-    const response = await axios.delete(url, { headers, params, timeout: 120 });
-    return response.data;
+    const response = await axios.delete(url, { headers, params });
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }
@@ -132,9 +144,12 @@ export async function updateSubOrg({
   };
 
   try {
-    const response = await axios.put(url, payload, { headers });
-    return response.data;
+    const response = await axios.put(url, payload, { headers});
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }

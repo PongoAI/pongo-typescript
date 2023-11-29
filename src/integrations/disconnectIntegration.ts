@@ -19,8 +19,11 @@ export async function disconnectIntegration(args: {
 
   try {
     const response = await axios.post(url, { headers, data: { integration_id: integrationId, integration_name: integrationName } });
-    return response.data;
+    return response;
   } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
     throw error;
   }
 }

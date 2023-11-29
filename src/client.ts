@@ -56,28 +56,29 @@ export class PongoClient {
     }
   }
 
-  public async search(
+  public async search(options: {
     subOrgId: string,
     query: string,
-    startTime?: string,
-    endTime?: string,
-    sources: string[] = [],
-    numResults: number = 15,
-    maxRerankerResults: number = 5
-  ): Promise<any> {
-    return search(
-        this.userId,
-        this.secretKey,
-        subOrgId,
-        query,
-        numResults,
-        maxRerankerResults,
-        startTime,
-        endTime,
-        sources,
-        this.version
-      );
+    startTime?: number,
+    endTime?: number,
+    sources?: string[],
+    numResults?: number,
+    maxRerankerResults?: number
+  }): Promise<any> {
+    return search({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      query: options.query,
+      numResults: options.numResults ?? 15,
+      maxRerankerResults: options.maxRerankerResults ?? 5,
+      startTime: options.startTime,
+      endTime: options.endTime,
+      sources: options.sources ?? [],
+      version: this.version
+    });
   }
+  
 
   /**
    * Retrieves a single document chunk or a list of document chunks from the Pongo API.
@@ -85,19 +86,19 @@ export class PongoClient {
    * @param docId - ID of the document to be retrieved.
    * @param parentId - ID of the parent document to be retrieved. Will return all chunks of the parent document.
    */
-  public async get(
+  public async get(options:{
     subOrgId: string,
     docId?: string,
     parentId?: string
-  ): Promise<any> {
-    return get(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      docId,
-      parentId,
-      this.version
-    );
+  }): Promise<any> {
+    return get({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      docId: options.docId,
+      parentId: options.parentId,
+      version: this.version
+    });
   }
 
   /**
@@ -109,25 +110,25 @@ export class PongoClient {
    * @param metadata - Metadata for the data. Can be a single dictionary or a list of dictionaries.
    * @param timestamp - Timestamp for the data. Defaults to the current time.
    */
-  public async upload(
+  public async upload( options: {
     subOrgId: string,
     sourceName: string,
     data: string | string[],
     parentId?: string,
-    metadata: any = {},
+    metadata: any | {},
     timestamp?: number
-  ): Promise<any> {
-    return upload(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      sourceName,
-      data,
-      metadata,
-      parentId,
-      timestamp,
-      this.version
-    );
+  }): Promise<any> {
+    return upload({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      sourceName: options.sourceName,
+      data: options.data,
+      metadata: options.metadata,
+      parentId: options.parentId,
+      timestamp: options.timestamp,
+      version: this.version
+    });
   }
 
   /**
@@ -139,25 +140,26 @@ export class PongoClient {
    * @param metadata - Metadata for the data. Can be a single dictionary or a list of dictionaries.
    * @param timestamp - Timestamp for the data. Defaults to the current time.
    */
-  public async uploadPdf(
+  public async uploadPdf(options: {
     subOrgId: string,
     sourceName: string,
     filePath: string,
     parentId?: string,
-    metadata: any = {},
+    metadata: any | {},
     timestamp?: number
-  ): Promise<any> {
-    return uploadPdf(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      sourceName,
-      filePath,
-      metadata,
-      parentId,
-      timestamp,
-      this.version
-    );
+  }): Promise<any> {
+    const uploadParams = {
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      sourceName: options.sourceName,
+      filePath: options.filePath,
+      metadata: options.metadata,
+      parentId: options.parentId,
+      timestamp: options.timestamp,
+      version: this.version
+    };
+    return uploadPdf(uploadParams);
   }
 
   /**
@@ -166,19 +168,20 @@ export class PongoClient {
    * @param docId - ID of the document to be deleted.
    * @param parentId - ID of the parent document to be deleted. Will delete all chunks of the parent document.
    */
-  public async deleteDocument(
+  public async deleteDocument(options: {
     subOrgId: string,
     docId?: string,
     parentId?: string
-  ): Promise<any> {
-    return deleteDocument(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      docId,
-      parentId,
-      this.version
-    );
+  }): Promise<any> {
+    const deleteParams = {
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      docId: options.docId,
+      parentId: options.parentId,
+      version: this.version
+    };
+    return deleteDocument(deleteParams);
   }
 
   /**
@@ -187,19 +190,19 @@ export class PongoClient {
    * @param siteName - Name of the site being scraped.
    * @param siteUrl - URL of the site to scrape.
    */
-  public async scrapeWebsite(
+  public async scrapeWebsite(options: {
     subOrgId: string,
     siteName: string,
     siteUrl: string
-  ): Promise<any> {
-    return scrapeWebsite(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      siteName,
-      siteUrl,
-      this.version
-    );
+  }): Promise<any> {
+    return scrapeWebsite({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      siteName: options.siteName,
+      siteUrl: options.siteUrl,
+      version: this.version
+    });
   }
 
   /**
@@ -208,19 +211,19 @@ export class PongoClient {
    * @param integrationName - Name of the integration to authenticate with.
    * @param redirectUri - The address users will be sent to after completing the authentication process.
    */
-  public async getAuthLink(
+  public async getAuthLink(options: {
     subOrgId: string,
     integrationName: string,
     redirectUri: string
-  ): Promise<any> {
-    return getAuthLink(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      integrationName,
-      redirectUri,
-      this.version
-    );
+  }): Promise<any> {
+    return getAuthLink({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      integrationName: options.integrationName,
+      redirectUri: options.redirectUri,
+      version: this.version
+    });
   }
 
   /**
@@ -228,17 +231,17 @@ export class PongoClient {
    * @param integrationId - ID of the google drive integration to update
    * @param newDirs - Array containing the new "enabled" states of google drive directories, id's and length must be the same
    */
-  public async updateDriveDirectories(
+  public async updateDriveDirectories(options: {
     newDirs: any[],
     integrationId: string
-  ): Promise<any> {
-    return updateDriveDirectories(
-      this.userId,
-      this.secretKey,
-      newDirs,
-      integrationId,
-      this.version
-    );
+  }): Promise<any> {
+    return updateDriveDirectories({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      newDirs: options.newDirs,
+      integrationId: options.integrationId,
+      version: this.version
+    });
   }
 
   /**
@@ -246,32 +249,32 @@ export class PongoClient {
    * @param integrationId - ID of the integration to delete
    * @param integrationName - Name of the integration to delete
    */
-  public async disconnectIntegration(
+  public async disconnectIntegration(options: {
     integrationId: string,
     integrationName: string
-  ): Promise<any> {
-    return disconnectIntegration(
-      this.userId,
-      this.secretKey,
-      integrationId,
-      integrationName,
-      this.version
-    );
+  }): Promise<any> {
+    return disconnectIntegration({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      integrationId: options.integrationId,
+      integrationName: options.integrationName,
+      version: this.version
+    });
   }
 
   /**
    * Creates a sub organization with a given name, returns the sub organization id and metadata.
    * @param subOrgName - Name of the sub organization to create.
    */
-  public async createSubOrg(
+  public async createSubOrg(options: {
     subOrgName: string
-  ): Promise<any> {
-    return createSubOrg(
-      this.userId,
-      this.secretKey,
-      subOrgName,
-      this.version
-    );
+  }): Promise<any> {
+    return createSubOrg({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgName: options.subOrgName,
+      version: this.version
+    });
   }
 
   /**
@@ -279,41 +282,41 @@ export class PongoClient {
    * @param subOrgId - ID of the sub organization to update.
    * @param subOrgName - New name for the sub organization.
    */
-  public async updateSubOrg(
+  public async updateSubOrg( options: {
     subOrgId: string,
     subOrgName: string
-  ): Promise<any> {
-    return updateSubOrg(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      subOrgName,
-      this.version
-    );
+  }): Promise<any> {
+    return updateSubOrg({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      subOrgName: options.subOrgName,
+      version: this.version
+    });
   }
 
   /**
    * Returns list of all sub organizations.
    */
   public async getSubOrgs(): Promise<any> {
-    return getSubOrgs(
-      this.userId,
-      this.secretKey,
-      this.version
-    );
+    return getSubOrgs({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      version: this.version
+    });
   }
 
   /**
    * Retrieves a sub organization by ID.
    * @param subOrgId - ID of the sub organization to retrieve.
    */
-  public async getSubOrg(subOrgId: string): Promise<any> {
-    return getSubOrg(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      this.version
-    );
+  public async getSubOrg(options: {subOrgId: string}): Promise<any> {
+    return getSubOrg({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      version: this.version
+    });
   }
 
   /**
@@ -321,13 +324,13 @@ export class PongoClient {
    * Will also delete all data associated with the sub organization.
    * @param subOrgId - ID of the sub organization to delete.
    */
-  public async deleteSubOrg(subOrgId: string): Promise<any> {
-    return deleteSubOrg(
-      this.userId,
-      this.secretKey,
-      subOrgId,
-      this.version
-    );
+  public async deleteSubOrg(options: {subOrgId: string}): Promise<any> {
+    return deleteSubOrg({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      version: this.version
+    });
   }
 
 
