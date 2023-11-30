@@ -1,7 +1,7 @@
 {
     "require": ["ts-node/register"],
     "extension": ["ts"],
-    "spec": "tests/webScraper.test.ts", 
+    "spec": "tests/auth.test.ts", 
     "watch-files": ["src/**/*.ts", "tests/**/*.ts"],
     "watch-ignore": ["node_modules"]
   }
