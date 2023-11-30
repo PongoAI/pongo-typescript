@@ -36,7 +36,14 @@ describe('Search Tests', () => {
     const response = await pongoClient.search({
       subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
       query: "How can marchex help automotive dealerships?",
-      sources: ["pongo_api"],
+      sources: ["pongo_api"]
+    });
+    expect(response.status).to.equal(200);
+  });
+
+  it('should search the parent organization', async () => {
+    const response = await pongoClient.search({
+      query: "How can marchex help automotive dealerships?",
     });
     expect(response.status).to.equal(200);
   });

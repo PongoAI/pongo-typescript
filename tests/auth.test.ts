@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { PongoClient } from 'pongo-typescript';
+import { PongoClient } from '../src/client';
 import dotenv from 'dotenv';
 
 dotenv.config();

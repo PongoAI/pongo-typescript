@@ -57,7 +57,7 @@ export class PongoClient {
   }
 
   public async search(options: {
-    subOrgId: string,
+    subOrgId?: string,
     query: string,
     startTime?: number,
     endTime?: number,
@@ -68,7 +68,7 @@ export class PongoClient {
     return search({
       publicKey: this.userId,
       secretKey: this.secretKey,
-      subOrgId: options.subOrgId,
+      subOrgId: options.subOrgId ?? undefined,
       query: options.query,
       numResults: options.numResults ?? 15,
       maxRerankerResults: options.maxRerankerResults ?? 5,
