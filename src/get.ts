@@ -11,7 +11,7 @@ export async function get({
 }: {
   publicKey: string,
   secretKey: string,
-  subOrgId: string,
+  subOrgId?: string,
   docId?: string,
   parentId?: string,
   version?: string

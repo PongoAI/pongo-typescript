@@ -87,7 +87,7 @@ export class PongoClient {
    * @param parentId - ID of the parent document to be retrieved. Will return all chunks of the parent document.
    */
   public async get(options:{
-    subOrgId: string,
+    subOrgId?: string,
     docId?: string,
     parentId?: string
   }): Promise<any> {
@@ -111,7 +111,7 @@ export class PongoClient {
    * @param timestamp - Timestamp for the data. Defaults to the current time.
    */
   public async upload( options: {
-    subOrgId: string,
+    subOrgId?: string,
     sourceName: string,
     data: string | string[],
     parentId?: string,
@@ -141,7 +141,7 @@ export class PongoClient {
    * @param timestamp - Timestamp for the data. Defaults to the current time.
    */
   public async uploadPdf(options: {
-    subOrgId: string,
+    subOrgId?: string,
     sourceName: string,
     filePath: string,
     parentId?: string,
@@ -169,7 +169,7 @@ export class PongoClient {
    * @param parentId - ID of the parent document to be deleted. Will delete all chunks of the parent document.
    */
   public async deleteDocument(options: {
-    subOrgId: string,
+    subOrgId?: string,
     docId?: string,
     parentId?: string
   }): Promise<any> {
@@ -191,7 +191,7 @@ export class PongoClient {
    * @param siteUrl - URL of the site to scrape.
    */
   public async scrapeWebsite(options: {
-    subOrgId: string,
+    subOrgId?: string,
     siteName: string,
     siteUrl: string
   }): Promise<any> {

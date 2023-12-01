@@ -14,9 +14,9 @@ describe('Upload Tests', () => {
     const testStrData = "test";
     const testSingleMetadata = { test: "metadata" };
     const docId = "test_doc_id";
-    const subOrgId = "0df63126-a0d4-42ad-861c-343375a784f8";
+    // const subOrgId = "0df63126-a0d4-42ad-861c-343375a784f8";
     const result = await pongoClient.upload({
-      subOrgId: subOrgId,
+    //   subOrgId: subOrgId,
       sourceName: "test",
       parentId: docId,
       data: testStrData,
@@ -29,9 +29,9 @@ describe('Upload Tests', () => {
     const testListData = ["test", "data"];
     const testListMetadata = { test2: "metadata2" };
     const docId = "test_doc_id_lst";
-    const subOrgId = "0df63126-a0d4-42ad-861c-343375a784f8";
+    // const subOrgId = "0df63126-a0d4-42ad-861c-343375a784f8";
     const result = await pongoClient.upload({
-      subOrgId: subOrgId,
+    //   subOrgId: subOrgId,
       sourceName: "test",
       parentId: docId,
       data: testListData,
@@ -43,9 +43,9 @@ describe('Upload Tests', () => {
   it('should fail to upload with bad authentication and return status code 404', async () => {
     const testListData = ["test", "data"];
     const testListMetadata = [{ test1: "metadata1" }, { test2: "metadata2" }];
-    const subOrgId = "0df63126-a0d4-42ad-861c-343375a784fa";
+    // const subOrgId = "0df63126-a0d4-42ad-861c-343375a784fa";
     const result = await pongoClient.upload({
-      subOrgId: subOrgId,
+    //   subOrgId: subOrgId,
       sourceName: "test",
       data: testListData,
       metadata: testListMetadata,
@@ -56,9 +56,9 @@ describe('Upload Tests', () => {
   it('should fail to upload with bad organization id and return status code 404', async () => {
     const testListData = ["test", "data"];
     const testListMetadata = [{ test1: "metadata1" }, { test2: "metadata2" }];
-    const subOrgId = "DNE";
+    // const subOrgId = "DNE";
     const result = await pongoClient.upload({
-      subOrgId: subOrgId,
+    //   subOrgId: subOrgId,
       sourceName: "test",
       data: testListData,
       metadata: testListMetadata,
@@ -70,9 +70,9 @@ describe('Upload Tests', () => {
     const testPdfPath = "/Users/jamarimorrison/Downloads/Nondisclosure Agreement (2).pdf";
     const testPdfMetadata = { test: "pdf" };
     const docId = "test_pdf_id";
-    const subOrgId = "0df63126-a0d4-42ad-861c-343375a784f8";
+    // const subOrgId = "0df63126-a0d4-42ad-861c-343375a784f8";
     const result = await pongoClient.uploadPdf({
-      subOrgId: subOrgId,
+    //   subOrgId: subOrgId,
       sourceName: "test",
       parentId: docId,
       filePath: testPdfPath,

@@ -11,19 +11,17 @@ const pongoClient = new PongoClient(PONGO_PUBLIC, PONGO_SECRET);
 describe('Get Tests', () => {
   it('should get a single document and return status code 200', async () => {
     const res = await pongoClient.get({
-      subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
-      docId: "9e1786c7-f616-30bd-8466-67dde5a1bdc3",
+    //   subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
+      docId: "be738d73-3326-35bb-825c-9b59a489bace",
     });
-    console.log(res.data)
     expect(res.status).to.equal(200);
   });
 
   it('should get documents by parent ID and return status code 200', async () => {
     const res = await pongoClient.get({
-      subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
-      parentId: "0f375816-3f52-466a-a653-9b506589b7b1",
+    //   subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
+      parentId: "21171997-51f7-4c86-b8f7-9184e41249da",
     });
-    console.log(res.data)
     expect(res.status).to.equal(200);
   });
 });

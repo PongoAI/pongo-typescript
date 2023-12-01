@@ -86,7 +86,7 @@ export async function uploadPdf({
       const formData = new FormData();
       const fileBuffer = await fsPromises.readFile(filePath);
       formData.append('file', fileBuffer, path.basename(filePath));
-      formData.append('sub_org_id', subOrgId);
+      if(subOrgId) {formData.append('sub_org_id', subOrgId);}
       formData.append('source', sourceName);
       formData.append('metadata', JSON.stringify(metadata));
       formData.append('timestamp', payload.timestamp.toString());

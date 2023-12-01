@@ -11,7 +11,7 @@ describe('Web Scraper Tests', () => {
   it('should scrape a website and return status code 200', async () => {
     const pongoClient = new PongoClient(PONGO_PUBLIC, PONGO_SECRET);
     const response = await pongoClient.scrapeWebsite({
-      subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
+    //   subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
       siteName: "test_site",
       siteUrl: "https://joinpongo.com/"
     });
