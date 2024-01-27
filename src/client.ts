@@ -131,36 +131,36 @@ export class PongoClient {
     });
   }
 
-  /**
-   * Uploads a PDF to Pongo for semantic search.
-   * @param subOrgId - Sub organization of the data.
-   * @param sourceName - Name of the source of the data.
-   * @param filePath - Path to the PDF file to be uploaded.
-   * @param parentId - ID of the parent document.
-   * @param metadata - Metadata for the data. Can be a single dictionary or a list of dictionaries.
-   * @param timestamp - Timestamp for the data. Defaults to the current time.
-   */
-  public async uploadPdf(options: {
-    subOrgId?: string,
-    sourceName: string,
-    filePath: string,
-    parentId?: string,
-    metadata: any | {},
-    timestamp?: number
-  }): Promise<any> {
-    const uploadParams = {
-      publicKey: this.userId,
-      secretKey: this.secretKey,
-      subOrgId: options.subOrgId,
-      sourceName: options.sourceName,
-      filePath: options.filePath,
-      metadata: options.metadata,
-      parentId: options.parentId,
-      timestamp: options.timestamp,
-      version: this.version
-    };
-    return uploadPdf(uploadParams);
-  }
+  // /**
+  //  * Uploads a PDF to Pongo for semantic search.
+  //  * @param subOrgId - Sub organization of the data.
+  //  * @param sourceName - Name of the source of the data.
+  //  * @param filePath - Path to the PDF file to be uploaded.
+  //  * @param parentId - ID of the parent document.
+  //  * @param metadata - Metadata for the data. Can be a single dictionary or a list of dictionaries.
+  //  * @param timestamp - Timestamp for the data. Defaults to the current time.
+  //  */
+  // public async uploadPdf(options: {
+  //   subOrgId?: string,
+  //   sourceName: string,
+  //   filePath: string,
+  //   parentId?: string,
+  //   metadata: any | {},
+  //   timestamp?: number
+  // }): Promise<any> {
+  //   const uploadParams = {
+  //     publicKey: this.userId,
+  //     secretKey: this.secretKey,
+  //     subOrgId: options.subOrgId,
+  //     sourceName: options.sourceName,
+  //     filePath: options.filePath,
+  //     metadata: options.metadata,
+  //     parentId: options.parentId,
+  //     timestamp: options.timestamp,
+  //     version: this.version
+  //   };
+  //   return uploadPdf(uploadParams);
+  // }
 
   /**
    * Deletes a single document chunk or a list of document chunks from Pongo.
