@@ -9,7 +9,7 @@ import { createSubOrg, getSubOrg, getSubOrgs, deleteSubOrg, updateSubOrg} from '
 import {scrapeWebsite} from './scrape'
 import { search } from './search';
 import {uploadPdf, upload} from './upload'
-
+import { getJob, getJobs } from './jobs';
 
 
 // import { FormData, Blob } from 'form-data';
@@ -184,26 +184,26 @@ export class PongoClient {
     return deleteDocument(deleteParams);
   }
 
-  /**
-   * Scrapes a website and uploads the data to Pongo for semantic search.
-   * @param subOrgId - Sub organization of the data.
-   * @param siteName - Name of the site being scraped.
-   * @param siteUrl - URL of the site to scrape.
-   */
-  public async scrapeWebsite(options: {
-    subOrgId?: string,
-    siteName: string,
-    siteUrl: string
-  }): Promise<any> {
-    return scrapeWebsite({
-      publicKey: this.userId,
-      secretKey: this.secretKey,
-      subOrgId: options.subOrgId,
-      siteName: options.siteName,
-      siteUrl: options.siteUrl,
-      version: this.version
-    });
-  }
+  // /**
+  //  * Scrapes a website and uploads the data to Pongo for semantic search.
+  //  * @param subOrgId - Sub organization of the data.
+  //  * @param siteName - Name of the site being scraped.
+  //  * @param siteUrl - URL of the site to scrape.
+  //  */
+  // public async scrapeWebsite(options: {
+  //   subOrgId?: string,
+  //   siteName: string,
+  //   siteUrl: string
+  // }): Promise<any> {
+  //   return scrapeWebsite({
+  //     publicKey: this.userId,
+  //     secretKey: this.secretKey,
+  //     subOrgId: options.subOrgId,
+  //     siteName: options.siteName,
+  //     siteUrl: options.siteUrl,
+  //     version: this.version
+  //   });
+  // }
 
   /**
    * Generates a link for sub-organizations to authenticate with other platforms.
@@ -333,6 +333,39 @@ export class PongoClient {
     });
   }
 
+  /**
+   * Gets 100 Jobs with the provided status, results are paginated.
+   * 
+   * @param subOrgId - ID of the sub organization to pull jobs from.  If omitted will use main organization
+   * @param jobStatus - Status of jobs to pull.  Valid options are "*", "queued", "processing", "processed"
+   * @param page - Page to pull jobs from
+   */
+  public async getJobs(options: {jobStatus: string, subOrgId?: string, page?: number}): Promise<any> {
+    return getJobs({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      jobStatus: options.jobStatus,
+      page: options.page,
+      version: this.version
+    });
+  }
+
+    /**
+   * Get all Jobs with the input status
+   * Will also delete all data associated with the sub organization.
+   * @param subOrgId - ID of the sub organization to pull jobs from.  If omitted will use main organization
+   * @param jobID - ID of the job to pull
+   */
+  public async getJob(options: {jobId: string, subOrgId?: string}): Promise<any> {
+    return getJob({
+      publicKey: this.userId,
+      secretKey: this.secretKey,
+      subOrgId: options.subOrgId,
+      jobId: options.jobId,
+      version: this.version
+    });
+  }
 
 
 }

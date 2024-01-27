@@ -1,0 +1,78 @@
+import axios from 'axios';
+import { BASE_URL } from './utils';
+
+export async function getJobs({
+  publicKey,
+  secretKey,
+  subOrgId,
+  jobStatus = '*',
+  page = 0,
+  version = "v1"
+}: {
+  publicKey: string,
+  secretKey: string,
+  jobStatus: string
+  page?: number
+  subOrgId?: string,
+  version?: string
+}): Promise<any> {
+  const headers = {
+    secret: secretKey,
+    id: publicKey,
+  };
+  const url = `${BASE_URL}/api/${version}/jobs`;
+
+  const params = {
+    sub_org_id: subOrgId,
+    job_status: jobStatus,
+    page: page
+
+  };
+
+  try {
+    const response = await axios.get(url, { headers, params });
+    return response;
+  } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
+    throw error;
+  }
+}
+
+export async function getJob({
+    publicKey,
+    secretKey,
+    subOrgId,
+    jobId,
+    version = "v1"
+  }: {
+    publicKey: string,
+    secretKey: string,
+    jobId: string
+    subOrgId?: string,
+    version?: string
+  }): Promise<any> {
+    const headers = {
+      secret: secretKey,
+      id: publicKey,
+    };
+    const url = `${BASE_URL}/api/${version}/job`;
+  
+    const params = {
+      sub_org_id: subOrgId,
+      job_id: jobId,
+  
+    };
+  
+    try {
+      const response = await axios.get(url, { headers, params });
+      return response;
+    } catch (error) {
+      if (error.response) {
+        return error.response;
+      }
+      throw error;
+    }
+  }
+  

@@ -1,2 +1,2 @@
-export const BASE_URL = "https://api.joinpongo.com";
+export const BASE_URL = "http://localhost:8000";
 
