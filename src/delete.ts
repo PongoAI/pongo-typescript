@@ -1,17 +1,15 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils'
 
 export async function deleteDocument(args: {
-  publicKey: string,
   secretKey: string,
   subOrgId?: string,
   docId?: string,
   parentId?: string,
   websiteUrl?: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   var {
-    publicKey,
     secretKey,
     subOrgId,
     docId,
@@ -22,7 +20,6 @@ export async function deleteDocument(args: {
 
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/data`;
 

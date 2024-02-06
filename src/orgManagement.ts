@@ -1,20 +1,17 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 export async function createSubOrg({
-  publicKey,
   secretKey,
   subOrgName,
   version = "v1",
 }: {
-  publicKey: string,
   secretKey: string,
   subOrgName: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/sub-org`;
   const payload = {
@@ -33,17 +30,14 @@ export async function createSubOrg({
 }
 
 export async function getSubOrgs({
-  publicKey,
   secretKey,
   version = "v1",
 }: {
-  publicKey: string,
   secretKey: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/sub-orgs`;
 
@@ -59,19 +53,16 @@ export async function getSubOrgs({
 }
 
 export async function getSubOrg({
-  publicKey,
   secretKey,
   subOrgId,
   version = "v1",
 }: {
-  publicKey: string,
   secretKey: string,
   subOrgId: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/sub-org`;
   const params = {
@@ -90,19 +81,16 @@ export async function getSubOrg({
 }
 
 export async function deleteSubOrg({
-  publicKey,
   secretKey,
   subOrgId,
   version = "v1",
 }: {
-  publicKey: string,
   secretKey: string,
   subOrgId: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/sub-org`;
   const params = {
@@ -121,21 +109,18 @@ export async function deleteSubOrg({
 }
 
 export async function updateSubOrg({
-  publicKey,
   secretKey,
   subOrgId,
   subOrgName,
   version = "v1",
 }: {
-  publicKey: string,
   secretKey: string,
   subOrgId: string,
   subOrgName: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/sub-org`;
   const payload = {

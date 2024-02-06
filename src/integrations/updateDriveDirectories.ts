@@ -1,15 +1,13 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from '../utils';
 
 export async function updateDriveDirectories(args: {
-  publicKey: string,
   secretKey: string,
   newDirs: any[],
   integrationId: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const {
-    publicKey,
     secretKey,
     newDirs,
     integrationId,
@@ -18,7 +16,6 @@ export async function updateDriveDirectories(args: {
 
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/google-drive/update-dirs`;
 
