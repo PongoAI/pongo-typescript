@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils'
 
 export async function deleteDocument(args: {
@@ -9,7 +9,7 @@ export async function deleteDocument(args: {
   parentId?: string,
   websiteUrl?: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   var {
     publicKey,
     secretKey,

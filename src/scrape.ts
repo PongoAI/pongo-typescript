@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 export async function scrapeWebsite({
@@ -8,7 +8,7 @@ export async function scrapeWebsite({
   siteName,
   siteUrl,
   version = "v1",
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,

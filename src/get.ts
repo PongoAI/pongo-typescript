@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 export async function get({
@@ -15,7 +15,7 @@ export async function get({
   docId?: string,
   parentId?: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,

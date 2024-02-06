@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from '../utils';
 
 export async function updateDriveDirectories(args: {
@@ -7,7 +7,7 @@ export async function updateDriveDirectories(args: {
   newDirs: any[],
   integrationId: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const {
     publicKey,
     secretKey,

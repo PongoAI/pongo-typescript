@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from '../utils';
 
 export async function getAuthLink(args: {
@@ -8,7 +8,7 @@ export async function getAuthLink(args: {
   integrationName: string,
   redirectUri: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const {
     publicKey,
     secretKey,

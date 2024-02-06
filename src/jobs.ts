@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 export async function getJobs({
@@ -15,7 +15,7 @@ export async function getJobs({
   page?: number
   subOrgId?: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -52,7 +52,7 @@ export async function getJob({
     jobId: string
     subOrgId?: string,
     version?: string
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     const headers = {
       secret: secretKey,
       id: publicKey,

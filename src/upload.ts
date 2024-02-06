@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 import { randomUUID } from 'crypto';
 
@@ -15,7 +15,7 @@ export async function upload({
   parentId,
   timestamp,
   version = "v1",
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -54,7 +54,7 @@ export async function uploadPdf({
   parentId,
   timestamp,
   version = "v1",
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     'secret': secretKey,
     'id': publicKey,

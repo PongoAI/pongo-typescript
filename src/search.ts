@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 export async function search({
@@ -12,7 +12,7 @@ export async function search({
   endTime,
   sources = [],
   version = "v1",
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 import { disconnectIntegration } from './integrations/disconnectIntegration';
 import { getAuthLink } from './integrations/getAuthLink';
@@ -6,9 +6,9 @@ import { updateDriveDirectories } from './integrations/updateDriveDirectories';
 import { deleteDocument } from './delete';
 import { get } from './get';
 import { createSubOrg, getSubOrg, getSubOrgs, deleteSubOrg, updateSubOrg} from './orgManagement'
-import {scrapeWebsite} from './scrape'
+// import {scrapeWebsite} from './scrape'
 import { search } from './search';
-import {uploadPdf, upload} from './upload'
+import { upload} from './upload'
 import { getJob, getJobs } from './jobs';
 
 
@@ -39,7 +39,7 @@ export class PongoClient {
     });
   }
 
-  public async heartbeat(): Promise<any> {
+  public async heartbeat(): Promise<AxiosResponse> {
     const url = `${BASE_URL}/api/${this.version}/authorize_user`;
     const headers = { secret: this.secretKey, id: this.userId };
 
@@ -64,7 +64,7 @@ export class PongoClient {
     sources?: string[],
     numResults?: number,
     maxRerankerResults?: number
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     return search({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -90,7 +90,7 @@ export class PongoClient {
     subOrgId?: string,
     docId?: string,
     parentId?: string
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     return get({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -117,7 +117,7 @@ export class PongoClient {
     parentId?: string,
     metadata: any | {},
     timestamp?: number
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     return upload({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -147,7 +147,7 @@ export class PongoClient {
   //   parentId?: string,
   //   metadata: any | {},
   //   timestamp?: number
-  // }): Promise<any> {
+  // }): Promise<AxiosResponse> {
   //   const uploadParams = {
   //     publicKey: this.userId,
   //     secretKey: this.secretKey,
@@ -172,7 +172,7 @@ export class PongoClient {
     subOrgId?: string,
     docId?: string,
     parentId?: string
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     const deleteParams = {
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -194,7 +194,7 @@ export class PongoClient {
   //   subOrgId?: string,
   //   siteName: string,
   //   siteUrl: string
-  // }): Promise<any> {
+  // }): Promise<AxiosResponse> {
   //   return scrapeWebsite({
   //     publicKey: this.userId,
   //     secretKey: this.secretKey,
@@ -215,7 +215,7 @@ export class PongoClient {
     subOrgId: string,
     integrationName: string,
     redirectUri: string
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     return getAuthLink({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -234,7 +234,7 @@ export class PongoClient {
   public async updateDriveDirectories(options: {
     newDirs: any[],
     integrationId: string
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     return updateDriveDirectories({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -252,7 +252,7 @@ export class PongoClient {
   public async disconnectIntegration(options: {
     integrationId: string,
     integrationName: string
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     return disconnectIntegration({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -268,7 +268,7 @@ export class PongoClient {
    */
   public async createSubOrg(options: {
     subOrgName: string
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     return createSubOrg({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -285,7 +285,7 @@ export class PongoClient {
   public async updateSubOrg( options: {
     subOrgId: string,
     subOrgName: string
-  }): Promise<any> {
+  }): Promise<AxiosResponse> {
     return updateSubOrg({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -298,7 +298,7 @@ export class PongoClient {
   /**
    * Returns list of all sub organizations.
    */
-  public async getSubOrgs(): Promise<any> {
+  public async getSubOrgs(): Promise<AxiosResponse> {
     return getSubOrgs({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -310,7 +310,7 @@ export class PongoClient {
    * Retrieves a sub organization by ID.
    * @param subOrgId - ID of the sub organization to retrieve.
    */
-  public async getSubOrg(options: {subOrgId: string}): Promise<any> {
+  public async getSubOrg(options: {subOrgId: string}): Promise<AxiosResponse> {
     return getSubOrg({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -324,7 +324,7 @@ export class PongoClient {
    * Will also delete all data associated with the sub organization.
    * @param subOrgId - ID of the sub organization to delete.
    */
-  public async deleteSubOrg(options: {subOrgId: string}): Promise<any> {
+  public async deleteSubOrg(options: {subOrgId: string}): Promise<AxiosResponse> {
     return deleteSubOrg({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -340,7 +340,7 @@ export class PongoClient {
    * @param jobStatus - Status of jobs to pull.  Valid options are "*", "queued", "processing", "processed"
    * @param page - Page to pull jobs from
    */
-  public async getJobs(options: {jobStatus: string, subOrgId?: string, page?: number}): Promise<any> {
+  public async getJobs(options: {jobStatus: string, subOrgId?: string, page?: number}): Promise<AxiosResponse> {
     return getJobs({
       publicKey: this.userId,
       secretKey: this.secretKey,
@@ -357,7 +357,7 @@ export class PongoClient {
    * @param subOrgId - ID of the sub organization to pull jobs from.  If omitted will use main organization
    * @param jobID - ID of the job to pull
    */
-  public async getJob(options: {jobId: string, subOrgId?: string}): Promise<any> {
+  public async getJob(options: {jobId: string, subOrgId?: string}): Promise<AxiosResponse> {
     return getJob({
       publicKey: this.userId,
       secretKey: this.secretKey,

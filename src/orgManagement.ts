@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 export async function createSubOrg({
@@ -11,7 +11,7 @@ export async function createSubOrg({
   secretKey: string,
   subOrgName: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -40,7 +40,7 @@ export async function getSubOrgs({
   publicKey: string,
   secretKey: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -68,7 +68,7 @@ export async function getSubOrg({
   secretKey: string,
   subOrgId: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -99,7 +99,7 @@ export async function deleteSubOrg({
   secretKey: string,
   subOrgId: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,
@@ -132,7 +132,7 @@ export async function updateSubOrg({
   subOrgId: string,
   subOrgName: string,
   version?: string
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     id: publicKey,
