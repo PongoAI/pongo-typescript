@@ -1,6 +1,6 @@
 {
   "name": "pongo-typescript",
-  "version": "1.0.9",
+  "version": "1.0.14",
   "description": "Typescript library for Pongo's API",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -45,7 +45,7 @@
     "@bitauth/libauth": "^1.17.1",
     "axois": "^0.0.1-security",
     "dotenv": "^16.3.1",
-    "pongo-typescript": "^1.0.4"
+    "pongo-typescript": "^1.0.10"
   },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",

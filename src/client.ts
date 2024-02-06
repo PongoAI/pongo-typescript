@@ -109,19 +109,15 @@ export class PongoClient {
    */
   public async upload( options: {
     subOrgId?: string,
-    sourceName: string,
     data: string | string[],
-    parentId?: string,
-    metadata: any | {},
+    metadata: any,
     timestamp?: number
   }): Promise<AxiosResponse> {
     return upload({
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
-      sourceName: options.sourceName,
       data: options.data,
       metadata: options.metadata,
-      parentId: options.parentId,
       timestamp: options.timestamp,
       version: this.version
     });

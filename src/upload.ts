@@ -8,10 +8,8 @@ const MAX_FILE_SIZE = 20 * 1024 * 1024;
 export async function upload({
   secretKey,
   subOrgId,
-  sourceName,
   data,
-  metadata = {},
-  parentId,
+  metadata,
   timestamp,
   version = "v1",
 }): Promise<AxiosResponse> {
@@ -20,11 +18,9 @@ export async function upload({
   };
   let payload: any = {
     sub_org_id: subOrgId,
-    source: sourceName,
     data: data,
     metadata: metadata,
     timestamp: timestamp || Math.floor(Date.now() / 1000),
-    parent_id: parentId || randomUUID(),
   };
 
   const url = `${BASE_URL}/api/${version}/upload-data`;
