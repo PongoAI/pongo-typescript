@@ -2,17 +2,15 @@ import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from '../utils';
 
 export async function disconnectIntegration(args: {
-  publicKey: string,
   secretKey: string,
   integrationId: string,
   integrationName: string,
   version?: string
 }): Promise<AxiosResponse> {
-  const { publicKey, secretKey, version = "v1", integrationId, integrationName } = args;
+  const { secretKey, version = "v1", integrationId, integrationName } = args;
 
   const headers = {
-    secret: secretKey,
-    id: publicKey,
+    secret: secretKey
   };
 
   const url = `${BASE_URL}/api/${version}/org/disconnect-integration`;

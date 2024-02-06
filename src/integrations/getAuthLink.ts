@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from '../utils';
 
 export async function getAuthLink(args: {
-  publicKey: string,
   secretKey: string,
   subOrgId: string,
   integrationName: string,
@@ -10,7 +9,6 @@ export async function getAuthLink(args: {
   version?: string
 }): Promise<AxiosResponse> {
   const {
-    publicKey,
     secretKey,
     subOrgId,
     integrationName,
@@ -20,7 +18,6 @@ export async function getAuthLink(args: {
 
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/sub-org/auth-link?sub_org_id=${subOrgId}&integration_name=${integrationName}&redirect_uri=${encodeURIComponent(redirectUri)}`;
 

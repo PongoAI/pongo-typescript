@@ -6,7 +6,6 @@ import { randomUUID } from 'crypto';
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 
 export async function upload({
-  publicKey,
   secretKey,
   subOrgId,
   sourceName,
@@ -18,7 +17,6 @@ export async function upload({
 }): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   let payload: any = {
     sub_org_id: subOrgId,
@@ -45,7 +43,6 @@ export async function upload({
 
 
 export async function uploadPdf({
-  publicKey,
   secretKey,
   subOrgId,
   sourceName,
@@ -57,7 +54,6 @@ export async function uploadPdf({
 }): Promise<AxiosResponse> {
   const headers = {
     'secret': secretKey,
-    'id': publicKey,
   };
   const url = `${BASE_URL}/api/${version}/upload-pdf`;
 

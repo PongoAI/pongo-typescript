@@ -2,14 +2,12 @@ import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 export async function get({
-  publicKey,
   secretKey,
   subOrgId,
   docId,
   parentId,
   version = "v1"
 }: {
-  publicKey: string,
   secretKey: string,
   subOrgId?: string,
   docId?: string,
@@ -18,7 +16,6 @@ export async function get({
 }): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/data`;
 

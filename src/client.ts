@@ -18,17 +18,16 @@ import { getJob, getJobs } from './jobs';
 // import path from 'path';
 
 export class PongoClient {
-  private userId: string;
+
   private secretKey: string;
   private version: string;
 
-  constructor(userId: string, secretKey: string, version: string = "v1") {
-    this.userId = userId;
+  constructor(secretKey: string, version: string = "v1") {
     this.secretKey = secretKey;
     this.version = version;
 
     const url = `${BASE_URL}/api/${this.version}/authorize_user`;
-    const headers = { secret: this.secretKey, id: this.userId };
+    const headers = { secret: this.secretKey };
 
     axios.get(url, { headers }).then(response => {
       if (response.status === 401) {
@@ -41,7 +40,7 @@ export class PongoClient {
 
   public async heartbeat(): Promise<AxiosResponse> {
     const url = `${BASE_URL}/api/${this.version}/authorize_user`;
-    const headers = { secret: this.secretKey, id: this.userId };
+    const headers = { secret: this.secretKey };
 
     try {
       const response = await axios.get(url, { headers });
@@ -66,7 +65,6 @@ export class PongoClient {
     maxRerankerResults?: number
   }): Promise<AxiosResponse> {
     return search({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId ?? undefined,
       query: options.query,
@@ -92,7 +90,6 @@ export class PongoClient {
     parentId?: string
   }): Promise<AxiosResponse> {
     return get({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       docId: options.docId,
@@ -119,7 +116,6 @@ export class PongoClient {
     timestamp?: number
   }): Promise<AxiosResponse> {
     return upload({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       sourceName: options.sourceName,
@@ -149,7 +145,6 @@ export class PongoClient {
   //   timestamp?: number
   // }): Promise<AxiosResponse> {
   //   const uploadParams = {
-  //     publicKey: this.userId,
   //     secretKey: this.secretKey,
   //     subOrgId: options.subOrgId,
   //     sourceName: options.sourceName,
@@ -174,7 +169,6 @@ export class PongoClient {
     parentId?: string
   }): Promise<AxiosResponse> {
     const deleteParams = {
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       docId: options.docId,
@@ -196,7 +190,6 @@ export class PongoClient {
   //   siteUrl: string
   // }): Promise<AxiosResponse> {
   //   return scrapeWebsite({
-  //     publicKey: this.userId,
   //     secretKey: this.secretKey,
   //     subOrgId: options.subOrgId,
   //     siteName: options.siteName,
@@ -217,7 +210,6 @@ export class PongoClient {
     redirectUri: string
   }): Promise<AxiosResponse> {
     return getAuthLink({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       integrationName: options.integrationName,
@@ -236,7 +228,6 @@ export class PongoClient {
     integrationId: string
   }): Promise<AxiosResponse> {
     return updateDriveDirectories({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       newDirs: options.newDirs,
       integrationId: options.integrationId,
@@ -254,7 +245,6 @@ export class PongoClient {
     integrationName: string
   }): Promise<AxiosResponse> {
     return disconnectIntegration({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       integrationId: options.integrationId,
       integrationName: options.integrationName,
@@ -270,7 +260,6 @@ export class PongoClient {
     subOrgName: string
   }): Promise<AxiosResponse> {
     return createSubOrg({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgName: options.subOrgName,
       version: this.version
@@ -287,7 +276,6 @@ export class PongoClient {
     subOrgName: string
   }): Promise<AxiosResponse> {
     return updateSubOrg({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       subOrgName: options.subOrgName,
@@ -300,7 +288,6 @@ export class PongoClient {
    */
   public async getSubOrgs(): Promise<AxiosResponse> {
     return getSubOrgs({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       version: this.version
     });
@@ -312,7 +299,6 @@ export class PongoClient {
    */
   public async getSubOrg(options: {subOrgId: string}): Promise<AxiosResponse> {
     return getSubOrg({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       version: this.version
@@ -326,7 +312,6 @@ export class PongoClient {
    */
   public async deleteSubOrg(options: {subOrgId: string}): Promise<AxiosResponse> {
     return deleteSubOrg({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       version: this.version
@@ -342,7 +327,6 @@ export class PongoClient {
    */
   public async getJobs(options: {jobStatus: string, subOrgId?: string, page?: number}): Promise<AxiosResponse> {
     return getJobs({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       jobStatus: options.jobStatus,
@@ -359,7 +343,6 @@ export class PongoClient {
    */
   public async getJob(options: {jobId: string, subOrgId?: string}): Promise<AxiosResponse> {
     return getJob({
-      publicKey: this.userId,
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
       jobId: options.jobId,

@@ -2,14 +2,12 @@ import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 export async function getJobs({
-  publicKey,
   secretKey,
   subOrgId,
   jobStatus = '*',
   page = 0,
   version = "v1"
 }: {
-  publicKey: string,
   secretKey: string,
   jobStatus: string
   page?: number
@@ -18,7 +16,6 @@ export async function getJobs({
 }): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
-    id: publicKey,
   };
   const url = `${BASE_URL}/api/${version}/jobs`;
 
@@ -41,13 +38,11 @@ export async function getJobs({
 }
 
 export async function getJob({
-    publicKey,
     secretKey,
     subOrgId,
     jobId,
     version = "v1"
   }: {
-    publicKey: string,
     secretKey: string,
     jobId: string
     subOrgId?: string,
@@ -55,7 +50,6 @@ export async function getJob({
   }): Promise<AxiosResponse> {
     const headers = {
       secret: secretKey,
-      id: publicKey,
     };
     const url = `${BASE_URL}/api/${version}/job`;
   
