@@ -16,7 +16,6 @@ describe('Organization Management Tests', () => {
 
   it('should get all sub organizations and return status code 200', async () => {
     const res = await pongoClient.getSubOrgs();
-    console.log(res.data)
     expect(res.status).to.equal(200);
   });
 
