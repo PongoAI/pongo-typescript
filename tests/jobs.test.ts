@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const PONGO_PUBLIC = process.env.PONGO_PUBLIC || 'N/A';
+
 const PONGO_SECRET = process.env.PONGO_SECRET || 'N/A';
-const pongoClient = new PongoClient(PONGO_PUBLIC, PONGO_SECRET);
+const pongoClient = new PongoClient(PONGO_SECRET);
 
 describe('Job Tests', () => {
   it('should get all jobs first page and return status code 200', async () => {

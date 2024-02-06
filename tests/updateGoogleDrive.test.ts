@@ -4,14 +4,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const PONGO_PUBLIC = process.env.PONGO_PUBLIC || 'N/A';
 const PONGO_SECRET = process.env.PONGO_SECRET || 'N/A';
 
 describe('Update Google Drive Directories Tests', () => {
   let pongoClient: PongoClient;
 
   before(() => {
-    pongoClient = new PongoClient(PONGO_PUBLIC, PONGO_SECRET);
+    pongoClient = new PongoClient(PONGO_SECRET);
   });
 
   it('should update Google Drive directories and return status code 200', async () => {
