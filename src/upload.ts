@@ -11,7 +11,7 @@ export async function upload(args: {
   secretKey: string,
   subOrgId: string,
   data: string | string[],
-  metadata: UploadMetadata,
+  metadata: UploadMetadata | UploadMetadata[],
   timestamp: number,
   version?: string,
 }): Promise<AxiosResponse> {
