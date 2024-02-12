@@ -12,7 +12,7 @@ export async function getJobs({
   secretKey: string,
   jobStatus: string
   page?: number
-  subOrgId?: string,
+  subOrgId: string,
   version?: string
 }): Promise<AxiosResponse> {
   const headers = {
@@ -46,7 +46,7 @@ export async function getJob({
   }: {
     secretKey: string,
     jobId: string
-    subOrgId?: string,
+    subOrgId: string,
     version?: string
   }): Promise<AxiosResponse> {
     const headers = {
