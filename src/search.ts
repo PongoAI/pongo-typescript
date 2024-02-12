@@ -6,7 +6,7 @@ export async function search({
   subOrgId,
   query,
   numResults = 15,
-  sampelSize = 10,
+  sampleSize = 10,
   reduceTokens = false,
   startTime,
   endTime,
@@ -26,7 +26,7 @@ export async function search({
     reduce_tokens: reduceTokens,
     end_time: endTime,
     num_results: numResults,
-    sample_size: sampelSize,
+    sample_size: sampleSize,
   };
 
   const params = Object.fromEntries(Object.entries(payload).filter(([_, value]) => value != null));

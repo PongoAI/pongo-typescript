@@ -66,7 +66,7 @@ export class PongoClient {
       subOrgId: options.subOrgId ?? undefined,
       query: options.query,
       numResults: options.numResults ?? 15,
-      sampelSize: options.sampleSize ?? 10,
+      sampleSize: options.sampleSize ?? 10,
       reduceTokens: options.reduceTokens ?? false,
       startTime: options.startTime,
       endTime: options.endTime,
