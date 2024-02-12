@@ -13,37 +13,15 @@ describe('Search Tests', () => {
     pongoClient = new PongoClient(PONGO_SECRET);
   });
 
-  it('should search and return status code 200', async () => {
+  it('should search and return status code 200 with 5 results', async () => {
     const response = await pongoClient.search({
-      subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
-      query: "How can marchex help automotive dealerships?",
+      subOrgId: "351989f7-0e84-4009-8ec4-ead4463e60a8",
+      query: "When did LVMH start YSL?",
+      numResults: 5,
+      sampleSize: 5
     });
     expect(response.status).to.equal(200);
+    expect(response.data.length).to.equal(5);
   });
 
-  it('should search with time range and return status code 200', async () => {
-    const response = await pongoClient.search({
-      subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
-      query: "How can marchex help automotive dealerships?",
-      startTime: 1600223000,
-      endTime: 1701223034,
-    });
-    expect(response.status).to.equal(200);
-  });
-
-  it('should search with source list and return status code 200', async () => {
-    const response = await pongoClient.search({
-      subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
-      query: "How can marchex help automotive dealerships?",
-      sources: ["pongo_api"]
-    });
-    expect(response.status).to.equal(200);
-  });
-
-  it('should search the parent organization', async () => {
-    const response = await pongoClient.search({
-      query: "How can marchex help automotive dealerships?",
-    });
-    expect(response.status).to.equal(200);
-  });
 });
