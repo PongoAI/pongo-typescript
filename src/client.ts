@@ -5,12 +5,13 @@ import { get } from './get';
 import { disconnectIntegration } from './integrations/disconnectIntegration';
 import { getAuthLink } from './integrations/getAuthLink';
 import { updateDriveDirectories } from './integrations/updateDriveDirectories';
+import { UploadMetadata } from './interfaces';
+import { GoogleDriveDirectory } from './interfaces/GoogleDriveDirectory';
 import { getJob, getJobs } from './jobs';
 import { createSubOrg, deleteSubOrg, getSubOrg, getSubOrgs, updateSubOrg} from './orgManagement'
 import { search } from './search';
 import { upload} from './upload'
 import { BASE_URL } from './utils';
-
 
 // import { FormData, Blob } from 'form-data';
 // import fs from 'fs';
@@ -108,7 +109,7 @@ export class PongoClient {
   public async upload( options: {
     subOrgId?: string,
     data: string | string[],
-    metadata: any,
+    metadata: UploadMetadata,
     timestamp?: number
   }): Promise<AxiosResponse> {
     return upload({
@@ -218,7 +219,7 @@ export class PongoClient {
    * @param newDirs - Array containing the new "enabled" states of google drive directories, id's and length must be the same
    */
   public async updateDriveDirectories(options: {
-    newDirs: any[],
+    newDirs: GoogleDriveDirectory[],
     integrationId: string
   }): Promise<AxiosResponse> {
     return updateDriveDirectories({
