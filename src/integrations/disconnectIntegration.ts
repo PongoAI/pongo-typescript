@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+
 import { BASE_URL } from '../utils';
 
 export async function disconnectIntegration(args: {

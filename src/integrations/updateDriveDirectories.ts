@@ -1,9 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
+
+import { GoogleDriveDirectory } from '../interfaces/GoogleDriveDirectory';
 import { BASE_URL } from '../utils';
 
 export async function updateDriveDirectories(args: {
   secretKey: string,
-  newDirs: any[],
+  newDirs: GoogleDriveDirectory[],
   integrationId: string,
   version?: string
 }): Promise<AxiosResponse> {
