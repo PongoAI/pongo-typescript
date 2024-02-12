@@ -6,7 +6,8 @@ export async function search({
   subOrgId,
   query,
   numResults = 15,
-  maxRerankerResults = 5,
+  sampelSize = 10,
+  reduceTokens = false,
   startTime,
   endTime,
   sources = [],
@@ -22,9 +23,10 @@ export async function search({
     query: query,
     sources: sources.join(','),
     start_time: startTime,
+    reduce_tokens: reduceTokens,
     end_time: endTime,
     num_results: numResults,
-    max_reranker_results: maxRerankerResults,
+    sample_size: sampelSize,
   };
 
   const params = Object.fromEntries(Object.entries(payload).filter(([_, value]) => value != null));

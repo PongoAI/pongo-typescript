@@ -1,15 +1,15 @@
 import axios, { AxiosResponse } from 'axios';
-import { BASE_URL } from './utils';
+
+import { deleteDocument } from './delete';
+import { get } from './get';
 import { disconnectIntegration } from './integrations/disconnectIntegration';
 import { getAuthLink } from './integrations/getAuthLink';
 import { updateDriveDirectories } from './integrations/updateDriveDirectories';
-import { deleteDocument } from './delete';
-import { get } from './get';
-import { createSubOrg, getSubOrg, getSubOrgs, deleteSubOrg, updateSubOrg} from './orgManagement'
-// import {scrapeWebsite} from './scrape'
+import { getJob, getJobs } from './jobs';
+import { createSubOrg, deleteSubOrg, getSubOrg, getSubOrgs, updateSubOrg} from './orgManagement'
 import { search } from './search';
 import { upload} from './upload'
-import { getJob, getJobs } from './jobs';
+import { BASE_URL } from './utils';
 
 
 // import { FormData, Blob } from 'form-data';
@@ -22,7 +22,7 @@ export class PongoClient {
   private secretKey: string;
   private version: string;
 
-  constructor(secretKey: string, version: string = "v1") {
+  constructor(secretKey: string, version = "v1") {
     this.secretKey = secretKey;
     this.version = version;
 
@@ -41,8 +41,6 @@ export class PongoClient {
   public async heartbeat(): Promise<AxiosResponse> {
     const url = `${BASE_URL}/api/${this.version}/authorize_user`;
     const headers = { secret: this.secretKey };
-
-    try {
       const response = await axios.get(url, { headers });
       if (response.status === 401) {
         throw new Error("Invalid credentials");
@@ -50,9 +48,7 @@ export class PongoClient {
         throw new Error("Server error");
       }
       return response;
-    } catch (error) {
-      throw error;
-    }
+
   }
 
   public async search(options: {
@@ -60,16 +56,18 @@ export class PongoClient {
     query: string,
     startTime?: number,
     endTime?: number,
+    reduceTokens?: boolean,
     sources?: string[],
     numResults?: number,
-    maxRerankerResults?: number
+    sampleSize?: number
   }): Promise<AxiosResponse> {
     return search({
       secretKey: this.secretKey,
       subOrgId: options.subOrgId ?? undefined,
       query: options.query,
       numResults: options.numResults ?? 15,
-      maxRerankerResults: options.maxRerankerResults ?? 5,
+      sampelSize: options.sampleSize ?? 10,
+      reduceTokens: options.reduceTokens ?? false,
       startTime: options.startTime,
       endTime: options.endTime,
       sources: options.sources ?? [],
