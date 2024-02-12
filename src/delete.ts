@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+
 import { BASE_URL } from './utils'
 
 export async function deleteDocument(args: {
@@ -9,14 +10,14 @@ export async function deleteDocument(args: {
   websiteUrl?: string,
   version?: string
 }): Promise<AxiosResponse> {
-  var {
+  const {
     secretKey,
     subOrgId,
-    docId,
     parentId,
     websiteUrl,
     version = "v1"
   } = args;
+  let { docId } = args;
 
   const headers = {
     secret: secretKey,
@@ -32,6 +33,7 @@ export async function deleteDocument(args: {
   }
 
   let payloadParentId = parentId;
+
   if (websiteUrl) {
     payloadParentId = websiteUrl;
     docId = undefined;

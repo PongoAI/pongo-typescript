@@ -14,17 +14,22 @@ describe('Delete Tests', function() {
 
   it('should delete a single document', async () => {
     const res = await pongoClient.deleteDocument({
-        // subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
-        docId: "bcfc0b71-1d2c-3c73-af14-d4ec6b3bdee9",
+        subOrgId: "ddde9d10-162a-4b19-8cff-3e52fe8c3643",
+        docId: "c631b32c-7278-390f-8934-6cba099d2604",
       })
 
+      console.log(res.data)
     expect(res.status).to.equal(200);
   });
 
+
+
+
+  
   it('should delete a parent document', async () => {
     const res = await pongoClient.deleteDocument({
-    //   subOrgId: "0df63126-a0d4-42ad-861c-343375a784f8",
-      parentId: "21171997-51f7-4c86-b8f7-9184e41249da",
+      subOrgId: "f16fbcf0-bcb2-438b-8ecd-57fb91c8098d",
+      parentId: "single_test",
     });
 
     expect(res.status).to.equal(200);

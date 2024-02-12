@@ -1,26 +1,29 @@
 import axios, { AxiosResponse } from 'axios';
+
+import { UploadMetadata } from './interfaces';
 import { BASE_URL } from './utils';
-import { randomUUID } from 'crypto';
 
 
-const MAX_FILE_SIZE = 20 * 1024 * 1024;
 
-export async function upload({
-  secretKey,
-  subOrgId,
-  data,
-  metadata,
-  timestamp,
-  version = "v1",
+
+
+export async function upload(args: {
+  secretKey: string,
+  subOrgId: string,
+  data: string | string[],
+  metadata: UploadMetadata | UploadMetadata[],
+  timestamp: number,
+  version?: string,
 }): Promise<AxiosResponse> {
   const headers = {
-    secret: secretKey,
+    secret: args.secretKey,
   };
-  let payload: any = {
-    sub_org_id: subOrgId,
-    data: data,
-    metadata: metadata,
-    timestamp: timestamp || Math.floor(Date.now() / 1000),
+  const { version = "v1" } = args; // version defaults to "v1" if not provided
+  const payload = {
+    sub_org_id: args.subOrgId,
+    data: args.data,
+    metadata: args.metadata,
+    timestamp: args.timestamp || Math.floor(Date.now() / 1000),
   };
 
   const url = `${BASE_URL}/api/${version}/upload-data`;
@@ -38,63 +41,5 @@ export async function upload({
 
 
 
-export async function uploadPdf({
-  secretKey,
-  subOrgId,
-  sourceName,
-  filePath,
-  metadata = {},
-  parentId,
-  timestamp,
-  version = "v1",
-}): Promise<AxiosResponse> {
-  const headers = {
-    'secret': secretKey,
-  };
-  const url = `${BASE_URL}/api/${version}/upload-pdf`;
-
-  let payload: any = {
-    sub_org_id: subOrgId,
-    source: sourceName,
-    metadata: metadata,
-    timestamp: timestamp || Math.floor(Date.now() / 1000),
-    parent_id: parentId || randomUUID(),
-  };
-
-  if (filePath.endsWith(".pdf")) {
-    const fs = require('fs');
-    const fsPromises = fs.promises;
-    const path = require('path');
-    const axios = require('axios').default;
-    const FormData = require('form-data');
-
-    try {
-      const fileStats = await fsPromises.stat(filePath);
-      const file_size = fileStats.size;
-      if (file_size > MAX_FILE_SIZE) {
-        throw new Error("The file is too large. Please provide a file that is less than 20MB.");
-      }
-
-      const formData = new FormData();
-      const fileBuffer = await fsPromises.readFile(filePath);
-      formData.append('file', fileBuffer, path.basename(filePath));
-      if(subOrgId) {formData.append('sub_org_id', subOrgId);}
-      formData.append('source', sourceName);
-      formData.append('metadata', JSON.stringify(metadata));
-      formData.append('timestamp', payload.timestamp.toString());
-      formData.append('parent_id', payload.parent_id);
-
-      const response = await axios.post(url, formData, { headers: headers });
-      return response;
-    } catch (error) {
-      if (error.response) {
-        return error.response;
-      }
-      throw error;
-    }
-  } else {
-    throw new Error("Provided file is not a PDF.");
-  }
-}
 
 

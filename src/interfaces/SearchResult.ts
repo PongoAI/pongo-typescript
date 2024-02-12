@@ -2,7 +2,9 @@ export interface SearchResult {
     parent_doc_id: string;
     text: string;
     is_parent: boolean;
-    metadata: any;
+    metadata: {
+      [key: string]: unknown;
+    };
     source: string;
     parent_id: string;
     doc_index: number;

@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+
 import { BASE_URL } from './utils';
 
 export async function search({
@@ -6,7 +7,8 @@ export async function search({
   subOrgId,
   query,
   numResults = 15,
-  maxRerankerResults = 5,
+  sampleSize = 10,
+  reduceTokens = false,
   startTime,
   endTime,
   sources = [],
@@ -22,13 +24,13 @@ export async function search({
     query: query,
     sources: sources.join(','),
     start_time: startTime,
+    reduce_tokens: reduceTokens,
     end_time: endTime,
     num_results: numResults,
-    max_reranker_results: maxRerankerResults,
+    sample_size: sampleSize,
   };
 
-  const params = Object.fromEntries(Object.entries(payload).filter(([_, value]) => value != null));
-
+  const params = Object.fromEntries(Object.entries(payload).filter(([ , value]) => value != null));
   try {
     const response = await axios.get(url, { headers, params });
     return response;
