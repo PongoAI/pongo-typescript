@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+
 import { BASE_URL } from './utils';
 
 export async function search({
@@ -29,8 +30,7 @@ export async function search({
     sample_size: sampleSize,
   };
 
-  const params = Object.fromEntries(Object.entries(payload).filter(([_, value]) => value != null));
-
+  const params = Object.fromEntries(Object.entries(payload).filter(([ , value]) => value != null));
   try {
     const response = await axios.get(url, { headers, params });
     return response;
