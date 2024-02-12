@@ -33,6 +33,7 @@ export async function deleteDocument(args: {
   }
 
   let payloadParentId = parentId;
+
   if (websiteUrl) {
     payloadParentId = websiteUrl;
     docId = undefined;
