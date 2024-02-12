@@ -4,7 +4,7 @@ import { BASE_URL } from './utils'
 
 export async function deleteDocument(args: {
   secretKey: string,
-  subOrgId?: string,
+  subOrgId: string,
   docId?: string,
   parentId?: string,
   websiteUrl?: string,

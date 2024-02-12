@@ -10,7 +10,7 @@ export async function get({
   version = "v1"
 }: {
   secretKey: string,
-  subOrgId?: string,
+  subOrgId: string,
   docId?: string,
   parentId?: string,
   version?: string

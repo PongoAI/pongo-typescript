@@ -53,7 +53,7 @@ export class PongoClient {
   }
 
   public async search(options: {
-    subOrgId?: string,
+    subOrgId: string,
     query: string,
     startTime?: number,
     endTime?: number,
@@ -84,7 +84,7 @@ export class PongoClient {
    * @param parentId - ID of the parent document to be retrieved. Will return all chunks of the parent document.
    */
   public async get(options:{
-    subOrgId?: string,
+    subOrgId: string,
     docId?: string,
     parentId?: string
   }): Promise<AxiosResponse> {
@@ -107,7 +107,7 @@ export class PongoClient {
    * @param timestamp - Timestamp for the data. Defaults to the current time.
    */
   public async upload( options: {
-    subOrgId?: string,
+    subOrgId: string,
     data: string | string[],
     metadata: UploadMetadata | UploadMetadata[],
     timestamp?: number
@@ -159,7 +159,7 @@ export class PongoClient {
    * @param parentId - ID of the parent document to be deleted. Will delete all chunks of the parent document.
    */
   public async deleteDocument(options: {
-    subOrgId?: string,
+    subOrgId: string,
     docId?: string,
     parentId?: string
   }): Promise<AxiosResponse> {
@@ -180,7 +180,7 @@ export class PongoClient {
   //  * @param siteUrl - URL of the site to scrape.
   //  */
   // public async scrapeWebsite(options: {
-  //   subOrgId?: string,
+  //   subOrgId: string,
   //   siteName: string,
   //   siteUrl: string
   // }): Promise<AxiosResponse> {
@@ -320,7 +320,7 @@ export class PongoClient {
    * @param jobStatus - Status of jobs to pull.  Valid options are "*", "queued", "processing", "processed"
    * @param page - Page to pull jobs from
    */
-  public async getJobs(options: {jobStatus: string, subOrgId?: string, page?: number}): Promise<AxiosResponse> {
+  public async getJobs(options: {jobStatus: string, subOrgId: string, page?: number}): Promise<AxiosResponse> {
     return getJobs({
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
@@ -336,7 +336,7 @@ export class PongoClient {
    * @param subOrgId - ID of the sub organization to pull jobs from.  If omitted will use main organization
    * @param jobID - ID of the job to pull
    */
-  public async getJob(options: {jobId: string, subOrgId?: string}): Promise<AxiosResponse> {
+  public async getJob(options: {jobId: string, subOrgId: string}): Promise<AxiosResponse> {
     return getJob({
       secretKey: this.secretKey,
       subOrgId: options.subOrgId,
