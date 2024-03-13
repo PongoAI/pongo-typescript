@@ -10,6 +10,7 @@ import { GoogleDriveDirectory } from './interfaces/GoogleDriveDirectory';
 import { getJob, getJobs } from './jobs';
 import { createSubOrg, deleteSubOrg, getSubOrg, getSubOrgs, updateSubOrg} from './orgManagement'
 import { search } from './search';
+import { rerank } from './rerank';
 import { upload} from './upload'
 import { BASE_URL } from './utils';
 
@@ -73,6 +74,41 @@ export class PongoClient {
       endTime: options.endTime,
       sources: options.sources ?? [],
       version: this.version
+    });
+  }
+
+    // /**
+  //  * Reranks the documents provided, reccomended to pass 50-100 results
+  //  * @param query - Query used to get the initial results
+  //  * @param numResults - Total number of results to return at the end of the operation
+  //  * @param vecSampleSize - Number of vector results to pass into the reranker at the end of Pongo's workflow
+  //  * @param plaintextSampleSize - Number of plain text results to pass into the reranker at the end of Pongo's workflow
+  //  * @param publicMetadataField - Name of the key in each docs object that contains metadata information to be included in pongo's reranking- defaults to "metadata"
+  //  * @param keyField - Name of the key in each docs object to be used as their id, defaults to "id"
+  //  * @param textField - Name of the key in each docs object to do the reranking on, defaults to "text"
+  //  */
+  public async rerank(options: {
+    query: string,
+    docs: any[],
+    numResults?: number,
+    vecSampleSize?: number,
+    sampleSize?: number,
+    publicMetadataField?: string,
+    keyField?: string,
+    plaintextSampleSize?: number,
+    textField?: string
+  }): Promise<AxiosResponse> {
+    return rerank({
+      secretKey: this.secretKey,
+      query: options.query,
+      docs: options.docs,
+      numResults: options.numResults,
+      vecSampleSize: options.vecSampleSize,
+      publicMetadataField: options.publicMetadataField,
+      keyField: options.keyField,
+      plaintextSampleSize: options.plaintextSampleSize,
+      textField: options.textField,
+      version: "v1",
     });
   }
   
