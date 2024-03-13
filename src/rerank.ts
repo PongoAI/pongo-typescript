@@ -18,7 +18,7 @@ export async function rerank({
   const headers = {
     secret: secretKey,
   };
-  const url = `${BASE_URL}/api/${version}/search`;
+  const url = `${BASE_URL}/api/${version}/rerank`;
 
   const payload = {
     query: query,
