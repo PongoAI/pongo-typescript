@@ -14,7 +14,7 @@ describe('Upload Tests', () => {
       subOrgId: "f16fbcf0-bcb2-438b-8ecd-57fb91c8098d",
       metadata: {parent_id: 'single_test', source: 'test'},
       data: 'This is what we uploaded'
-    });
+    }).then(res => {return res});
     expect(res.status).to.equal(200);
   });
 
