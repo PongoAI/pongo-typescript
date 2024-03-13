@@ -1,6 +1,6 @@
 {
   "name": "pongo-typescript",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Typescript library for Pongo's API",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
