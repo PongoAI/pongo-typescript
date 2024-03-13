@@ -16,14 +16,14 @@ describe('Rerank Tests', () => {
   it('should search and return status code 200 with 5 results', async () => {
     const response = await pongoClient.rerank({
       query: "When did LVMH start YSL?",
-      numResults: 5,
+      numResults: 3,
       docs: [{"ig": 1, "text": "Roses are red", "metadata": {}}, {"id": 2, "text": "Violets are blue", "betadata": {}}, {"id": 3, "text": "Roses are red2", "betadata": {}}, {"id": 4, "text": "Roses are red3", "betadata": {}}],
       publicMetadataField: "betadata",
       keyField: "ig"
     });
     console.log(response.data)
     expect(response.status).to.equal(200);
-    expect(response.data.length).to.equal(5);
+    expect(response.data.length).to.equal(3);
   });
 
 });
