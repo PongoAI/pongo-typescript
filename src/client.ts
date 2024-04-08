@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { search } from './search';
 import { semFilter } from './semFilter';
 import { BASE_URL } from './utils';
 
@@ -39,29 +38,6 @@ export class PongoClient {
 
   }
 
-  public async search(options: {
-    subOrgId: string,
-    query: string,
-    startTime?: number,
-    endTime?: number,
-    reduceTokens?: boolean,
-    sources?: string[],
-    numResults?: number,
-    sampleSize?: number
-  }): Promise<AxiosResponse> {
-    return search({
-      secretKey: this.secretKey,
-      subOrgId: options.subOrgId ?? undefined,
-      query: options.query,
-      numResults: options.numResults ?? 15,
-      sampleSize: options.sampleSize ?? 10,
-      reduceTokens: options.reduceTokens ?? false,
-      startTime: options.startTime,
-      endTime: options.endTime,
-      sources: options.sources ?? [],
-      version: this.version
-    });
-  }
 
     /**
    * Filters, scores, and orders the documents provided, reccomended to pass 50-100 results
