@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { BASE_URL } from './utils';
 
 
-export async function rerank({
+export async function semFilter({
   secretKey,
   query,
   docs,
@@ -18,7 +18,7 @@ export async function rerank({
   const headers = {
     secret: secretKey,
   };
-  const url = `${BASE_URL}/api/${version}/rerank`;
+  const url = `${BASE_URL}/api/${version}/filter`;
 
   const payload = {
     query: query,
