@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { search } from './search';
-import { rerank } from './rerank';
+import { semFilter } from './semFilter';
 import { BASE_URL } from './utils';
 
 
@@ -64,16 +64,16 @@ export class PongoClient {
   }
 
     /**
-   * Reranks the documents provided, reccomended to pass 50-100 results
+   * Filters, scores, and orders the documents provided, reccomended to pass 50-100 results
    * @param query - Query used to get the initial results
    * @param numResults - Total number of results to return at the end of the operation
-   * @param vecSampleSize - Number of vector results to pass into the reranker at the end of Pongo's workflow
-   * @param plaintextSampleSize - Number of plain text results to pass into the reranker at the end of Pongo's workflow
-   * @param publicMetadataField - Name of the key in each docs object that contains metadata information to be included in pongo's reranking- defaults to "metadata"
+   * @param vecSampleSize - Number of vector results to pass into the cross-encoder at the end of Pongo's workflow
+   * @param plaintextSampleSize - Number of plain text results to pass into the cross-encoder at the end of Pongo's workflow
+   * @param publicMetadataField - Name of the key in each docs object that contains metadata information to be included in pongo's scoring- defaults to "metadata"
    * @param keyField - Name of the key in each docs object to be used as their id, defaults to "id"
-   * @param textField - Name of the key in each docs object to do the reranking on, defaults to "text"
+   * @param textField - Name of the key in each docs object to do the scoring on, defaults to "text"
    */
-  public async rerank(options: {
+  public async semFilter(options: {
     query: string,
     docs: any[],
     numResults?: number,
@@ -84,7 +84,7 @@ export class PongoClient {
     plaintextSampleSize?: number,
     textField?: string
   }): Promise<AxiosResponse> {
-    return rerank({
+    return semFilter({
       secretKey: this.secretKey,
       query: options.query,
       docs: options.docs,
