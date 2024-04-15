@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { semFilter } from './semFilter';
+import { filter } from './filter';
 import { BASE_URL } from './utils';
 
 
@@ -49,7 +49,7 @@ export class PongoClient {
    * @param keyField - Name of the key in each docs object to be used as their id, defaults to "id"
    * @param textField - Name of the key in each docs object to do the scoring on, defaults to "text"
    */
-  public async semFilter(options: {
+  public async filter(options: {
     query: string,
     docs: any[],
     numResults?: number,
@@ -60,7 +60,7 @@ export class PongoClient {
     plaintextSampleSize?: number,
     textField?: string
   }): Promise<AxiosResponse> {
-    return semFilter({
+    return filter({
       secretKey: this.secretKey,
       query: options.query,
       docs: options.docs,
@@ -95,7 +95,7 @@ public async rerank(options: {
   plaintextSampleSize?: number,
   textField?: string
 }): Promise<AxiosResponse> {
-  return semFilter({
+  return filter({
     secretKey: this.secretKey,
     query: options.query,
     docs: options.docs,
