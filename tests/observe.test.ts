@@ -31,7 +31,7 @@ const lists_of_results = [
   ]
 ]
 
-describe('Filter Tests', () => {
+describe('Observe Tests', () => {
   let pongoClient: PongoClient;
 
   before(() => {
@@ -39,45 +39,38 @@ describe('Filter Tests', () => {
   });
 
   it('should search and return status code 200 with 3 results', async () => {
-    const response = await pongoClient.filter({
+    const response = await pongoClient.observe({
       query: "How many hearts do squids have?",
-      numResults: 3,
       docs: lists_of_results[2],
-      observe: true,
-      logMetadata: {'source': 'testing'}
+      logMetadata: {'source': 'testing, observe endpoint'}
     });
 
     console.log(response.data)
     expect(response.status).to.equal(200);
-    expect(response.data.length).to.equal(3);
+
   });
 
   it('should search and return status code 200 with 3 results', async () => {
-    const response = await pongoClient.filter({
+    const response = await pongoClient.observe({
       query: "Who made the mobile phone?",
-      numResults: 3,
       docs: lists_of_results[1],
-      observe: false,
-      logMetadata: {'source': 'testing'}
+      logMetadata: {'source': 'testing, observe endpiont'}
     });
 
     console.log(response.data)
     expect(response.status).to.equal(200);
-    expect(response.data.length).to.equal(3);
+
   });
 
   it('should search and return status code 200 with 3 results', async () => {
-    const response = await pongoClient.filter({
+    const response = await pongoClient.observe({
       query: "What are apples?",
-      numResults: 3,
       docs: lists_of_results[1],
-      observe: true,
-      logMetadata: {'source': 'testing'}
+      logMetadata: {'source': 'testing, observe endpoint'}
     });
 
     console.log(response.data)
     expect(response.status).to.equal(200);
-    expect(response.data.length).to.equal(3);
   });
 
 });

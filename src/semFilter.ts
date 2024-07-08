@@ -14,6 +14,8 @@ export async function semFilter({
   plaintextSampleSize = 5,
   textField = 'text',
   version = "v1",
+  observe = false,
+  logMetadata = {}
 }): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
@@ -28,7 +30,9 @@ export async function semFilter({
     num_results: numResults,
     sample_size: vecSampleSize,
     key_field: keyField,
-    docs: docs
+    docs: docs,
+    observe: observe,
+    log_metadata: logMetadata
   };
 
   const body = Object.fromEntries(Object.entries(payload).filter(([ , value]) => value != null));
