@@ -44,6 +44,7 @@ describe('Filter Tests', () => {
       numResults: 3,
       docs: lists_of_results[2],
       observe: true,
+      region: 'us-east-1',
       logMetadata: {'source': 'testing'}
     });
 
@@ -58,6 +59,8 @@ describe('Filter Tests', () => {
       numResults: 3,
       docs: lists_of_results[1],
       observe: false,
+      region: 'us-east-1',
+
       logMetadata: {'source': 'testing'}
     });
 
@@ -72,6 +75,8 @@ describe('Filter Tests', () => {
       numResults: 3,
       docs: lists_of_results[1],
       observe: true,
+      region: 'us-west-2',
+
       logMetadata: {'source': 'testing'}
     });
 

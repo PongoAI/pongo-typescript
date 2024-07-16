@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { BASE_URL } from './utils';
+import { BASE_URL, REGION_MAP } from './utils';
 
 
 export async function semFilter({
@@ -15,12 +15,15 @@ export async function semFilter({
   textField = 'text',
   version = "v1",
   observe = false,
-  logMetadata = {}
+  logMetadata = {},
+  region = "us-west-2"
 }): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
+    'Content-Type': 'application/json'
   };
-  const url = `${BASE_URL}/api/${version}/filter`;
+  const baseUrl = REGION_MAP[region] || BASE_URL;
+  const url = `${baseUrl}/api/${version}/filter`;
 
   const payload = {
     query: query,
@@ -28,14 +31,14 @@ export async function semFilter({
     public_metadata_field: publicMetadataField,
     plaintext_sample_size: plaintextSampleSize,
     num_results: numResults,
-    sample_size: vecSampleSize,
+    vec_sample_size: vecSampleSize,
     key_field: keyField,
     docs: docs,
     observe: observe,
     log_metadata: logMetadata
   };
 
-  const body = Object.fromEntries(Object.entries(payload).filter(([ , value]) => value != null));
+  const body = Object.fromEntries(Object.entries(payload).filter(([, value]) => value != null));
   try {
     const response = await axios.post(url, body, { headers });
     return response;

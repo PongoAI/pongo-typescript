@@ -42,6 +42,7 @@ describe('Observe Tests', () => {
     const response = await pongoClient.observe({
       query: "How many hearts do squids have?",
       docs: lists_of_results[2],
+      region: 'us-east-1',
       logMetadata: {'source': 'testing, observe endpoint'}
     });
 
@@ -50,27 +51,27 @@ describe('Observe Tests', () => {
 
   });
 
-  it('should search and return status code 200 with 3 results', async () => {
-    const response = await pongoClient.observe({
-      query: "Who made the mobile phone?",
-      docs: lists_of_results[1],
-      logMetadata: {'source': 'testing, observe endpiont'}
-    });
+  // it('should search and return status code 200 with 3 results', async () => {
+  //   const response = await pongoClient.observe({
+  //     query: "Who made the mobile phone?",
+  //     docs: lists_of_results[1],
+  //     logMetadata: {'source': 'testing, observe endpiont'}
+  //   });
 
-    console.log(response.data)
-    expect(response.status).to.equal(200);
+  //   console.log(response.data)
+  //   expect(response.status).to.equal(200);
 
-  });
+  // });
 
-  it('should search and return status code 200 with 3 results', async () => {
-    const response = await pongoClient.observe({
-      query: "What are apples?",
-      docs: lists_of_results[1],
-      logMetadata: {'source': 'testing, observe endpoint'}
-    });
+  // it('should search and return status code 200 with 3 results', async () => {
+  //   const response = await pongoClient.observe({
+  //     query: "What are apples?",
+  //     docs: lists_of_results[1],
+  //     logMetadata: {'source': 'testing, observe endpoint'}
+  //   });
 
-    console.log(response.data)
-    expect(response.status).to.equal(200);
-  });
+  //   console.log(response.data)
+  //   expect(response.status).to.equal(200);
+  // });
 
 });

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { BASE_URL } from './utils';
+import { BASE_URL, REGION_MAP } from './utils';
 
 export async function observe({
   secretKey,
@@ -8,18 +8,21 @@ export async function observe({
   docs,
   logMetadata = null,
   version = "v1",
+  region = "us-west-2",
 }: {
   secretKey: string,
   query: string,
-  docs: string[],
+  docs: any[],
   logMetadata?: Record<string, any> | null,
-  version?: string
+  version?: string,
+  region?: string
 }): Promise<AxiosResponse> {
   const headers = {
     secret: secretKey,
     'Content-Type': 'application/json',
   };
-  const url = `${BASE_URL}/api/${version}/observe`;
+  const baseUrl = REGION_MAP[region] || BASE_URL;
+  const url = `${baseUrl}/api/${version}/observe`;
 
   const payload = {
     query: query,
